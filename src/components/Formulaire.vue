@@ -8,12 +8,14 @@
             </div>
             <div>
                 <label for="name">Nom :</label>
-                <input type="text" id="name" v-model="name" />
+                <input type="text" id="name" v-model="name" placeholder="departement"/>
             </div>
         </div>
         <div class="btn">
             <button type="submit">Envoyer</button>
         </div>
+        <router-link to="/">retour</router-link>
+
     </form>
 
 
@@ -21,27 +23,30 @@
 
 
 <script setup lang="ts">
+
 import { ref } from 'vue';
 import { useAxios } from '@/composable/useAxios';
+import {clientHttp} from '@/composable/useAxios'
 
 const depId = ref('');
 const name = ref('');
 
-const addDepartement = async () => {
+const addDepartement = async() => {
     try {
         const data = {
             depId: depId.value,
             name: name.value,
         };
-
         await useAxios().post('/departement', data);
-        console.log('succès')
-    } catch (error) {
+        console.log(data);
+    }
+    catch (error) {
         console.log("Erreur d'envoi : " + error);
     }
 };
-addDepartement();
+
 </script>
+
 
 <style scoped>
     h1{
@@ -51,26 +56,39 @@ addDepartement();
         font-size: 45px;
         font-weight: bold;
     }
-    
+    label{
+        color: white;
+        font-size: 16px;
+    }
     input{
         outline: none;
-        border-radius: 35px;
+        border-radius: 5px;
         padding: 10px;
-        width: 30%;
+        width: 100%;
         margin-bottom: 25px;
     }
     .btn{
         display: flex;
         justify-content: flex-end;
-        padding-right: 15%;
     }
     button{
         outline: none;
         text-decoration: none;
         padding: 8px;
         width: 10%;
+        font-weight: bold;
         border-radius: 5px;
-        background-color: rgb(133, 133, 195);
+        background-color: greenyellow;
+        color: black;
+    }
+    a{
+        outline: none;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: rgb(43, 43, 105);
+        color: white;
+        font-weight: bold;
     }
 </style>
 

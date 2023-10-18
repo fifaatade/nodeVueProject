@@ -10,10 +10,13 @@ export const clientHttp = axios.create(
     }
 )
 export const useAxios = ()=>{
-    const get = async (url)=> {
-        return await clientHttp.get(url);
+    const get =  (url)=> {
+        return  clientHttp.get(url);
+    }
+    const post =  (url,data)=> {
+        return  clientHttp.post(url,data);
     }
     return {
-        get
+        get,post
     }
 }
